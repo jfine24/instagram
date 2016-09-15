@@ -2,11 +2,21 @@ var express = require('express');
 var app = express();
 var getUserFeed = require('./db.js').getUserFeed;
 var getUserImages = require('./db.js').getUserImages;
+var getImage = require('./db.js').getImage;
+var fs = require('fs');
 
 app.use(express.static('html'));
 app.use(express.static('js'));
 app.use(express.static('css'));
 app.use(express.static('build'));
+
+app.get('/Images/:file/:userID', function (req, res){
+  file = req.params.file;
+  var img = getImg(file);
+  res.writeHead(200, {'Content-Type': 'image/jpg' });
+  res.end(img, 'binary');
+});
+
 
 app.get('/getUserFeeds/:userId', function(req, res) {
      var userid = req.params.userId;
