@@ -5,7 +5,7 @@ class Main extends React.Component {
     constructor() {
         super();
         this.state = {
-            clickCount: 0,
+            clickCount: 5,
         };
     }
     render() {
