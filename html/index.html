@@ -39,9 +39,24 @@ function getUserFeeds() {
 </script>
 
 <h1>Our Instagram</h1>
-<label for="userID">User ID</label>
+<!-- <label for="userID">User ID</label>
 <input type="text" id="userID" name="userLogin">
-<button onclick="getUserFeeds()">click</button>
+<button onclick="getUserFeeds()">Log In</button>
+ -->
+<div>
+<br />
+<label for="imgName">Image Name</label>
+<input type="text" id="imgName" name="ImgName">
+<br />
+<label for="imgCaption">Image Caption</label>
+<input type="text" id="imgCaption" name="ImgCaption">
+<br />
+<form method='post' action='/upload/clown/this is cool/3' enctype='multipart/form-data'>
+	<input type='file' id='image' name='image'/>
+	<input type='submit' />
+</form>
+
+
 <div id=feeds></div>
 <div id="main"></div>
 
