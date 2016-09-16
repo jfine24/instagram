@@ -3,16 +3,16 @@ var app = express();
 var getUserFeed = require('./db.js').getUserFeed;
 var getUserImages = require('./db.js').getUserImages;
 var getImage = require('./db.js').getImage;
-var fs = require('fs');
 
 app.use(express.static('html'));
 app.use(express.static('js'));
 app.use(express.static('css'));
 app.use(express.static('build'));
 
-app.get('/Images/:file/:userID', function (req, res){
+app.get('/getImage/:userID/:file', function (req, res){
   file = req.params.file;
-  var img = getImg(file);
+  userID = req.params.userID;
+  var img = getImage(file, userID);
   res.writeHead(200, {'Content-Type': 'image/jpg' });
   res.end(img, 'binary');
 });
