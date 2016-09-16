@@ -7,11 +7,44 @@
 <body>
 <script src="bundle.js"></script>
 
-<h1>Our Instagram</h1>
+<script type="text/javascript">
+function getUserFeeds() {
+	document.getElementById("feeds").innerHTML = "";
+	var userID = document.getElementById("userID").value;
+	console.log(userID);
+  var xhttp = new XMLHttpRequest();
+  var feedUrl= "http://localhost:3000/getUserFeeds/" + userID + "/";
+  
+  console.log(feedUrl);
+  console.log(xhttp.responseText);
+  
+  xhttp.onreadystatechange = function() {
+ if (xhttp.readyState === 4 && xhttp.status === 200) { 
+     var obj = JSON.parse(xhttp.responseText);
+     console.log(obj);        
+     for (var i = 0; i < obj.length; i++) {           
+            console.log(i + " -> " + obj[i]['ImgName']);   
+            var cp =  document.createElement('span');                     
+            cp.innerHTML = obj[i]['ImgName'] + 
+            '&nbsp;&nbsp;&nbsp;' + obj[i]['ImgCaption'] + '<br/><img src="' + '/getImage/' + obj[i]['UserID'] + '/' + obj[i]['ImgLocation'] + '"height="250" /><br/><br/>';
+       
+        document.getElementById("feeds").appendChild(cp);   
+        cp = null;  
+      } 
+    } 
+  };
+  xhttp.open("GET", feedUrl, true);
+  xhttp.send();
+}
+</script>
 
+<h1>Our Instagram</h1>
+<label for="userID">User ID</label>
+<input type="text" id="userID" name="userLogin">
+<button onclick="getUserFeeds()">click</button>
 <div id=feeds></div>
 <div id="main"></div>
-<button onclick="getUserFeeds()">click</button>
+
 
 
 </body>
