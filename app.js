@@ -129,7 +129,8 @@ app.all("/logout", function (req, res) {
 app.post('/upload/', 
     multer({ storage: multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, __dirname + '/Images/' + req.userID + "/");
+            //cb(null, __dirname + '/Images/' + req.userID + "/");
+            cb(null, __dirname + '/Images/' + req.cookies.userID + "/");
         },
         filename: function (req, file, cb) {
             cb(null, Date.now() + '.' + mime.extension(file.mimetype));
@@ -141,9 +142,9 @@ app.post('/upload/',
         var userID = req.params.userID;
 
         var img = {
-            imgName: req.params.imgName,
-            imgCaption: req.params.imgCaption,
-            userID: req.params.userID,
+            imgName: req.body.ImgName,
+            imgCaption: req.body.ImgCaption,
+            userID: req.cookies.userID,
             imgLocation: req.file.filename,
         };
 
