@@ -17,15 +17,15 @@ function getUserIdByName(userName) {
                 });
         }).then(
         (rows) => {
-            var jsonrows = JSON.parse(JSON.stringify(rows));
-            return jsonrows[0].UserID;
+            var jsonrows = JSON.stringify(rows);
+            console.log("db.js jsonrows " + jsonrows);
+            return rows[0].UserID;
         }
         ).catch(
         (err) => {
             console.log(err);
         });
 }
-
 // function uploadImage(img, user) {
 
 

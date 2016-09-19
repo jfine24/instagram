@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Our Instagram</title>
+</head>
+<body>
+<script src="bundle.js"></script>
+
+<h1>Our Instagram</h1>
+
+<div id="main"></div>
+<div id="feeds"></div>
+<button onclick="getUserFeeds('4')">click</button>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+
+// field["ImgID"] = 3
+// field["ImgLocation"] = "\1\Good_Food_Display_-_NCI_Visuals_Online.jpg"
+// field["ImgName"] = "moreFood"
+// field["PostDate"] = "2016-09-15 16:51:07"
+
+  function getUserFeeds(id) {
+    var br = document.createElement('br');
+    var param = '/getUserFeeds/'+id;
+    $.getJSON(param, function(result){
+      if (result.error) {
+        $('#main').html(result.error);
+      } else {
+        var feeds = document.getElementById('feeds');
+        feeds.innerHTML = '';
+        $.each(result, function(i, field) {
+          feeds.appendChild(br);
+          var img = document.createElement('img');
+          img.id = "Img"+ field["ImgID"];
+          img.src = 'getImage' + field["ImgLocation"];
+          img.width = '400';
+          feeds.appendChild(img);
+          var p = document.createElement('p');
+          p.innerHTML = field['ImgName'] + ' (' + field['PostDate'] + ')';
+          feeds.appendChild(p);
+        });
+      }      
+    }, "json");    
+   }
+</script>
+</html>
