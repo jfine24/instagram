@@ -4,6 +4,7 @@ var getUserFeed = require('./db.js').getUserFeed;
 var getUserImages = require('./db.js').getUserImages;
 var getImage = require('./db.js').getImage;
 var getUserIdByName = require('./db.js').getUserIdByName;
+var uploadImage = require('./db.js').uploadImage;
 var fs = require('fs');
 var mime = require('mime');
 
@@ -54,9 +55,16 @@ app.post('/upload/:imgName/:imgCaption/:userID',
         var imgName = req.params.imgName;
         var imgCaption = req.params.imgCaption;
         var userID = req.params.userID;
-        console.log(userID);
-        console.log("success");
-        console.log(req.file);
+
+        var img = {
+            imgName: req.params.imgName,
+            imgCaption: req.params.imgCaption,
+            userID: req.params.userID,
+            imgLocation: req.file.filename,
+        };
+
+        uploadImage(JSON.stringify(img));
+
         res.status(204).end();
 });
 

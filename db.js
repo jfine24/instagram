@@ -17,11 +17,11 @@ function getUserIdByName(userName) {
                 });
         }).then(
         (rows) => {
-            //var jsonrows = JSON.stringify(rows);
-            var jsonrows = JSON.parse(JSON.stringify(rows));
+            var jsonrows = JSON.stringify(rows);
+            jsonrows = JSON.parse(JSON.stringify(rows));
             //console.log("this is result " + jsonrows[0].UserID);
             console.log("this is result " + jsonrows);
-            return jsonrows[0].UserID;
+            return jsonrows;
         }
         ).catch(
         (err) => {
@@ -29,27 +29,36 @@ function getUserIdByName(userName) {
         });
 }
 
-function uploadImage(img, path) {
+exports.uploadImage = uploadImage;
+function uploadImage(img) {
 
     var image = JSON.parse(img);
-    console.log(image);
-    fs.readFile(path, function (err, data) {
-    var imageName = image.ImgLocation
-    // If there's an error
-    if(!imageName){
-      console.log("There was an error")
-      //res.redirect("/");
-      //res.end();
-    } else {
-      var newPath = __dirname + "/Images/" + image.UserID + "/" + imageName;
-      console.log(newPath);
-      // write file to uploads/fullsize folder
-      fs.writeFile(newPath, data, function (err) {
-        // let's see it
-        //res.redirect("/uploads/fullsize/" + imageName);
-      });
-    }
-  });
+    //console.log("inside upload image " + image.imgName);
+
+    return new Promise(
+        (resolve, reject) => {          
+            db.all("INSERT INTO Image (ImgName, ImgCaption, ImgLocation, UserID) VALUES (?, ?, ?, ?)", image.imgName, image.imgCaption, image.imgLocation, image.userID,
+                function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                        return false;
+                    }         
+                    resolve(rows);
+                });
+        }).then(
+        (rows) => {
+            console.log("userImages rows: " + rows);
+            var jsonrows = JSON.stringify(rows);
+            console.log("userImages json: " + jsonrows);
+            return jsonrows;
+        }
+        ).catch(
+        (err) => {
+            console.log(err);
+        });
+
+
 
 }
 
@@ -137,14 +146,4 @@ function getUserFeed(userID) {
 //var testUser = 4;
 //getUserImages(testUser);
 //getUserFeed(testUser);
-
-getUserIdByName("Lenny");
-
-var testImage = {
-    ImgName: "clown",
-    ImgCaption: "Just keep swimming",
-    ImgLocation: "clown.jpg",
-    UserID: 4,
-};
-
 //uploadImage(JSON.stringify(testImage), "C:\\Users\\admin\\Desktop\\clown.jpg");

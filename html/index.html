@@ -51,7 +51,10 @@ function getUserFeeds() {
 <label for="imgCaption">Image Caption</label>
 <input type="text" id="imgCaption" name="ImgCaption">
 <br />
-<form method='post' action='/upload/clown/this is cool/3' enctype='multipart/form-data'>
+<label for="userID">User ID</label>
+<input type="text" id="userID" name="userID">
+<br />
+<form method='post' action='/upload' enctype='multipart/form-data'>
 	<input type='file' id='image' name='image'/>
 	<input type='submit' />
 </form>
