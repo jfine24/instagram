@@ -1,0 +1,139 @@
+
+html { 
+  background: url(bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#login-box {
+	width:333px;
+	height: 352px;
+	padding: 0px 76px 0 76px;
+	color: ##fff;
+	font: 18px Arial, Helvetica, sans-serif;
+	/* background: url(login-box-backg.png) no-repeat left top; */
+}
+
+.login-box {
+	padding: 7px; 
+	color: #fff;
+	font: 18px Arial, Helvetica, sans-serif;
+	/* background: url(login-box-backg.png) no-repeat left top; */
+}
+
+.logout-box {
+
+	padding: 7px; 
+	color: #fff;
+	background-color: dodgerblue;
+	font: 18px Arial, Helvetica, sans-serif;''
+}
+
+#login-box img {
+	border:none;
+}
+
+#login-box h2 {
+	padding:0;
+	margin:0;
+	color: #ebebeb;
+	font: bold 44px "Calibri", Arial;
+}
+
+
+
+#login-box-name {
+	float: left;
+	display:inline;
+	width:80px;
+	text-align: right;
+	padding: 14px 10px 0 0;
+	margin:0 0 7px 0;
+}
+
+#login-box-field {
+	float: left;
+	display:inline;
+	width:230px;
+	margin:0;
+	margin:0 0 7px 0;
+}
+
+
+.form-login  {
+	width: 316px;
+	padding: 10px 4px 6px 3px;
+	border: 1px solid #0d2c52;
+	/*background-color:#1e4f8a;*/
+	font-size: 16px;
+	color: #00b;
+}
+
+
+.login-box-options  {
+	clear:both;
+	padding-left:87px;
+	font-size: 11px;
+}
+
+.login-box-options a {
+	color: #00b;
+	font-size: 11px;
+}
+
+#loginError {
+	color:orange;
+}
+
+#tweets {
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 600px;
+}
+
+.tweet-username, .tweet-date {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
+}
+
+.tweet-date {
+	float: right;
+}
+#tweet-box {
+	text-align: left;
+	padding: 10px;
+	border: 1px solid #0d2c52;
+	background-color:#00b;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #1e4f8a;
+}
+
+div#tweet-box:hover {
+	background-color: #cbcbcb;
+}
+
+span.follow>img:hover, span.heart:hover {
+	background-image: url('follow-blue.png');
+	cursor: pointer;
+}
+
+#messageBox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #00b;	
+}
+h1, h2 {
+	color: white;
+    font-family: sans-serif;
+    font-size: 48px;
+}
+
+p {
+	color: white;
+}
