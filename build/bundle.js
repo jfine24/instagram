@@ -105,9 +105,9 @@
 	    return Main;
 	}(_react2.default.Component);
 	
-	function getUserFeeds() {
+	function getUserFeeds(userID) {
 	    var xhttp = new XMLHttpRequest();
-	    var feedUrl = "http://localhost:3000/getUserFeeds/" + 4 + "/";
+	    var feedUrl = "http://localhost:3000/getUserFeeds/" + userID + "/";
 	
 	    console.log(feedUrl);
 	    console.log(xhttp.responseText);

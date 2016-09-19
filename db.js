@@ -26,27 +26,36 @@ function getUserIdByName(userName) {
             console.log(err);
         });
 }
-// function uploadImage(img, user) {
 
+exports.uploadImage = uploadImage;
+function uploadImage(img) {
 
-//     fs.readFile(req.files.image.path, function (err, data) {
-//     var imageName = req.files.image.name
-//     // If there's an error
-//     if(!imageName){
-//       console.log("There was an error")
-//       res.redirect("/");
-//       res.end();
-//     } else {
-//       var newPath = __dirname + "/images/fullsize/" + imageName;
-//       // write file to uploads/fullsize folder
-//       fs.writeFile(newPath, data, function (err) {
-//         // let's see it
-//         res.redirect("/uploads/fullsize/" + imageName);
-//       });
-//     }
-//   });
+    var image = JSON.parse(img);
+    //console.log("inside upload image " + image.imgName);
 
-// }
+    return new Promise(
+        (resolve, reject) => {          
+            db.all("INSERT INTO Image (ImgName, ImgCaption, ImgLocation, UserID) VALUES (?, ?, ?, ?)", image.imgName, image.imgCaption, image.imgLocation, image.userID,
+                function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                        return false;
+                    }         
+                    resolve(rows);
+                });
+        }).then(
+        (rows) => {
+            console.log("userImages rows: " + rows);
+            var jsonrows = JSON.stringify(rows);
+            console.log("userImages json: " + jsonrows);
+            return jsonrows;
+        }
+        ).catch(
+        (err) => {
+            console.log(err);
+        });
+}
 
 exports.getImage = getImage;
 function getImage(location, UserID) {
@@ -76,8 +85,6 @@ function getImage(location, UserID) {
 //             console.log(err);
 //         });
 // }
-
-
 
 exports.getUserImages = getUserImages;
 function getUserImages(userID) {
@@ -134,3 +141,4 @@ function getUserFeed(userID) {
 //var testUser = 4;
 //getUserImages(testUser);
 //getUserFeed(testUser);
+//uploadImage(JSON.stringify(testImage), "C:\\Users\\admin\\Desktop\\clown.jpg");

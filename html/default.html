@@ -10,6 +10,21 @@
 <h1>Welcome to Instagram, <span id="userName"></span></h1>
 
 <div id="main"></div>
+
+
+<form method='post' action='/upload' enctype='multipart/form-data'>
+<br />
+<label for="imgName">Image Name</label>
+<input type="text" id="imgName" name="ImgName">
+<br />
+<label for="imgCaption">Image Caption</label>
+<input type="text" id="imgCaption" name="ImgCaption">
+<br />
+  <input type='file' id='image' name='image'/>
+  <input type='submit' />
+</form>
+
+
 <div id="feeds"></div>
 <form id="loginForm" name="loginForm" action="/logout" method="POST">
   <input type="submit" value="Log Out" name="submit" id="submit" />
@@ -42,7 +57,7 @@
           feeds.appendChild(br);
           var img = document.createElement('img');
           img.id = "Img"+ field["ImgID"];
-          img.src = 'getImage' + field["ImgLocation"];
+          img.src = 'getImage/' + field["UserID"] + "/" + field["ImgLocation"];
           img.width = '400';
           feeds.appendChild(img);
           var p = document.createElement('p');

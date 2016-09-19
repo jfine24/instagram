@@ -5,20 +5,42 @@ var getUserFeed = require('./db.js').getUserFeed;
 var getUserImages = require('./db.js').getUserImages;
 var getImage = require('./db.js').getImage;
 var getUserIdByName = require('./db.js').getUserIdByName;
-
-app.use(cookieParser());
+var uploadImage = require('./db.js').uploadImage;
+var fs = require('fs');
+var mime = require('mime');
 
 app.use(express.static('html'));
 app.use(express.static('js'));
 app.use(express.static('css'));
 app.use(express.static('img'));
 app.use(express.static('build'));
+app.use(cookieParser());
 
 var bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+var multer  = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + '/Images/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.' + mime.extension(file.mimetype));
+  }
+})
+
+var upload = multer({ storage: multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + '/Images/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.' + mime.extension(file.mimetype));
+  }
+}) })
 
 app.get('/getImage/:userID/:file', function (req, res){
   file = req.params.file;
@@ -104,6 +126,33 @@ app.all("/logout", function (req, res) {
     res.redirect('/login.html');
 });
 
+app.post('/upload/', 
+    multer({ storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname + '/Images/' + req.userID + "/");
+        },
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + '.' + mime.extension(file.mimetype));
+        }
+    }) 
+}).single('image'), function (req, res, next) {
+        var imgName = req.params.imgName;
+        var imgCaption = req.params.imgCaption;
+        var userID = req.params.userID;
+
+        var img = {
+            imgName: req.params.imgName,
+            imgCaption: req.params.imgCaption,
+            userID: req.params.userID,
+            imgLocation: req.file.filename,
+        };
+
+        uploadImage(JSON.stringify(img));
+
+        res.status(204).end();
+
+});
+
 app.get('/getUserFeeds/:userId', function(req, res) {
      var userid = req.params.userId;
      console.log("userid:" + userid);   
@@ -132,7 +181,42 @@ app.get('/getUserImages/:userId', function(req, res) {
         });       
 });
 
+app.get('/getUserIdByName/:userName', function (req, res){
+  var userName = req.params.userName;
+
+  var userID = getUserIdByName(userName);
+     userID.then(
+        (val) => {
+            res.send(val);
+            }
+        ).catch(
+            (err) => {
+            res.send(err);
+        });
+
+  console.log(userID);
+  //res.send(userID);
+});
+
 app.listen(3000, function () {
     console.log('Listening on port 3000');
 });
 
+// <<<<<<< HEAD
+// =======
+// app.get('/:userID', function (req, res) {
+// var userID = req.params.userID;
+
+//     storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, __dirname + '/Images/' + userID + "/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, "/" + userID + "/" + Date.now() + '.' + mime.extension(file.mimetype));
+//   }
+// })
+
+//     upload = multer({ storage: storage })
+
+//     res.redirect('index.html');
+// });
