@@ -4,20 +4,32 @@ var instagram = angular.module('instagram', []);
       instagram.controller('instaCtrl', function ($scope, $http, $window){
         
         $scope.login = function() {
-          var user = $scope.userName;
-          $http.post("/login/", {userName: user}, function(result){
-            if (result.error) {
-          window.location.replace("/login.html");
-        } else {
-          console.log(result.userName);
-          getUserFeeds(result.userID);
-        }
-    }, "json")};
-        
 
-        $scope.getUserFeed = function() {
-          console.log("in function");
-          $http.get("/getUserFeeds/1").success(function(data) {
+          $http.post("/login/", {userName: $scope.userName})
+          .then(function (response) {
+            var userID = response.data.userName;
+
+            if(userID !== undefined)
+            {
+              $scope.loginError = null;
+              $scope.getUserFeed(userID);
+            }
+            else {
+              $scope.loginError = "Invalid Login";
+              $scope.userName = "";
+            }
+              
+            });
+        }
+        
+        $scope.logout = function() {
+          $scope.loginError = "Login to continue!";
+          $scope.userName = "";
+        }
+
+        $scope.getUserFeed = function(id) {
+          console.log(id);
+          $http.get("/getUserFeeds/" + id).success(function(data) {
           console.log("in function");
           $scope.results = data;
           });

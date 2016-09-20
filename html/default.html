@@ -11,13 +11,13 @@
         <script src="default.js"></script>
     <script src="bundle.js"></script>
   <center>
-    <h1>Welcome to Instagram, <span id="userName"></span></h1>
+    <h1>Welcome to Instagram, {{userName}}</h1>
     <div id="main"></div>
 
 
-    <div id="login-box">
+    <div ng-show="loginError" id="login-box">
       <form ng-submit="login()">
-        <div id="loginError"></div>
+        <div id="loginError">{{loginError}}</div>
             <div id="login-box-field">
             <input ng-model="userName" id="userName" name="userName" class="form-login" title="Username" value="" placeholder="Username" size="30" maxlength="2048" />
             </div>
@@ -31,7 +31,7 @@
       </center>
     </div>
 
-    <form method='post' action='/upload' enctype='multipart/form-data'>
+    <form ng-show="!loginError" method='post' action='/upload' enctype='multipart/form-data'>
       <br />
       <input type="text" id="imgName" name="ImgName" class="form-login" placeholder="Image Name">
       <br />
@@ -46,9 +46,7 @@
     <br /><br /><br />
     <div id="feeds"></div>
 
-    <button ng-click="getUserFeed()">Click Me!</button>
-
-    <ul ng-repeat="result in results">
+    <ul ng-show="!loginError" ng-repeat="result in results">
       {{result.UserID}} <br />
       {{result.ImgName}} <br />
       <img ng-src="getImage/{{result.UserID}}/{{result.ImgLocation}}"/> <br />
@@ -56,10 +54,8 @@
       
     </ul>
 
-
-    <form id="loginForm" name="loginForm" action="/logout" method="POST">
-      <input type="submit" value="Log Out" name="submit" id="submit"  class="form-login" />
-    </form><br /><br />
+    <button ng-show="!loginError" ng-click="logout()" class="form-login">Log Out</button>
+    
   </center>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

@@ -102,8 +102,8 @@ app.post('/login', function (req, res) {
             if (user) {
                 res.cookie('userName', userName);
                 res.cookie('userID', val );
-                console.log(userName + "(ID: "+ user +") is logged in");
-                res.json({ userName: user });
+                console.log(userName + "(ID: "+ val +") is logged in");
+                res.json({ userName: val });
             } else {
                 console.log("user is not found");
                 res.json({ error: "User is not found" });
