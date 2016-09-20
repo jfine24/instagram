@@ -3,6 +3,8 @@
 var instagram = angular.module('instagram', []);
       instagram.controller('instaCtrl', function ($scope, $http, $window){
         
+        $scope.welcomeMessage = "Welcome to Instagram"
+
         $scope.login = function() {
 
           $http.post("/login/", {userName: $scope.userName})
@@ -11,6 +13,7 @@ var instagram = angular.module('instagram', []);
 
             if(userID !== undefined)
             {
+              $scope.welcomeMessage = "Welcome to Instagram, " + $scope.userName;
               $scope.loginError = null;
               $scope.getUserFeed(userID);
             }
@@ -23,6 +26,7 @@ var instagram = angular.module('instagram', []);
         }
         
         $scope.logout = function() {
+          $scope.welcomeMessage = "Welcome to Instagram";
           $scope.loginError = "Login to continue!";
           $scope.userName = "";
         }
