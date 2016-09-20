@@ -46,14 +46,15 @@
     <br /><br /><br />
     <div id="feeds"></div>
 
-    <ul ng-show="!loginError" ng-repeat="result in results" class="block">
-      {{result.UserID}} <br />
+    <div ng-show="!loginError" ng-repeat="result in results" class="block">
+      <center>
+      {{result.UserName}} <br />
       {{result.ImgName}} <br />
       <img ng-src="getImage/{{result.UserID}}/{{result.ImgLocation}}" width="400"/> <br />
       {{result.ImgCaption}} <br />
       {{result.PostDate}} <br />
-      
-    </ul>
+      </center>
+    </div>
 
     <button ng-show="!loginError" ng-click="logout()" class="form-login">Log Out</button>
     

@@ -116,7 +116,7 @@ exports.getUserFeed = getUserFeed;
 function getUserFeed(userID) {
     return new Promise(
         (resolve, reject) => {          
-            db.all("SELECT DISTINCT i.ImgID, i.UserID, i.ImgCaption, i.ImgName, i.PostDate, i.ImgLocation FROM Image as i, User as u WHERE i.UserID in ( select UserFollowed from Follow as f where f.UserID = ?)  ORDER BY i.PostDate desc", userID,
+            db.all("SELECT  i.ImgID,  i.UserID, (SELECT  u.UserName from User as u WHERE u.UserID = i.UserID) as UserName, i.ImgCaption, i.ImgName, i.PostDate, i.ImgLocation FROM Image as i WHERE i.UserID in ( select UserFollowed from Follow as f where f.UserID = ?)  ORDER BY i.PostDate desc", userID,
                 function (err, rows) {
                     if (err) {
                         console.log(err);
