@@ -39,6 +39,10 @@ var instagram = angular.module('instagram', []);
           });
         }
 
+        $scope.upload = function(id) {
+          
+        }
+
       });
 
 
