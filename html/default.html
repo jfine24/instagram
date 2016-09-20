@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="instagram">
 <head>
     <meta charset="utf-8">
     <title>Instagram</title>
     <link href="login-box.css" rel="stylesheet" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+
 </head>
-<body>
-  <script src="bundle.js"></script>
+<body ng-controller="instaCtrl">
+        <script src="default.js"></script>
+    <script src="bundle.js"></script>
   <center>
     <h1>Welcome to Instagram, <span id="userName"></span></h1>
     <div id="main"></div>
+
+
+    <div id="login-box">
+      <form ng-submit="login()">
+        <div id="loginError"></div>
+            <div id="login-box-field">
+            <input ng-model="instaCtrl.user.userName" id="userName" name="userName" class="form-login" title="Username" value="" placeholder="Username" size="30" maxlength="2048" />
+            </div>
+            <div id="login-box-field">
+            <input name="password" type="password" class="form-login" title="Password" value="" placeholder="Password" size="30" maxlength="2048" />
+          </div>
+          <br /><br /><br /><br /><br /><br />
+          <input class="login-box" type="submit" value="Submit" name="submit" id="submit" />
+      </form>
+      </div>
+      </center>
+    </div>
+
     <form method='post' action='/upload' enctype='multipart/form-data'>
       <br />
       <input type="text" id="imgName" name="ImgName" class="form-login" placeholder="Image Name">
@@ -19,8 +40,23 @@
       <input type='file' id='image' name='image' class="login-box" />
       <input type='submit' class="login-box"  />
     </form>
+
+
+
     <br /><br /><br />
     <div id="feeds"></div>
+
+    <button ng-click="getUserFeed()">Click Me!</button>
+
+    <ul ng-repeat="result in results">
+      {{result.UserID}} <br />
+      {{result.ImgName}} <br />
+      <img ng-src="getImage/{{result.UserID}}/{{result.ImgLocation}}"/> <br />
+      {{result.ImgCaption}} <br />
+      
+    </ul>
+
+
     <form id="loginForm" name="loginForm" action="/logout" method="POST">
       <input type="submit" value="Log Out" name="submit" id="submit"  class="form-login" />
     </form><br /><br />

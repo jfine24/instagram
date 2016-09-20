@@ -2,48 +2,48 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Our Instagram</title>
+    <title>Instagram</title>
+    <link href="login-box.css" rel="stylesheet" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+
 </head>
-<body>
-<script src="bundle.js"></script>
+<body ng-controller="instaCtrl">
+        <script src="default.js"></script>
+    <script src="bundle.js"></script>
+  <center>
+    <h1>Welcome to Instagram, <span id="userName"></span></h1>
+    <div id="main"></div>
 
-<h1>Our Instagram</h1>
+    <form method='post' action='/upload' enctype='multipart/form-data'>
+      <br />
+      <input type="text" id="imgName" name="ImgName" class="form-login" placeholder="Image Name">
+      <br />
+      <input type="text" id="imgCaption" name="ImgCaption" class="form-login" placeholder="Image Caption">
+      <br />
+      <input type='file' id='image' name='image' class="login-box" />
+      <input type='submit' class="login-box"  />
+    </form>
 
-<div id="main"></div>
-<div id="feeds"></div>
-<button onclick="getUserFeeds('4')">click</button>
 
+
+    <br /><br /><br />
+    <div id="feeds"></div>
+
+    <button ng-click="getUserFeed()">Click Me!</button>
+
+    <ul ng-repeat="result in results">
+      <li>{{result.ImgName}}</li>
+      <li>{{result.ImgCaption}}</li>
+      <li>{{result.UserID}}</li>
+    </ul>
+
+
+    <form id="loginForm" name="loginForm" action="/logout" method="POST">
+      <input type="submit" value="Log Out" name="submit" id="submit"  class="form-login" />
+    </form><br /><br />
+  </center>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script>
 
-// field["ImgID"] = 3
-// field["ImgLocation"] = "\1\Good_Food_Display_-_NCI_Visuals_Online.jpg"
-// field["ImgName"] = "moreFood"
-// field["PostDate"] = "2016-09-15 16:51:07"
-
-  function getUserFeeds(id) {
-    var br = document.createElement('br');
-    var param = '/getUserFeeds/'+id;
-    $.getJSON(param, function(result){
-      if (result.error) {
-        $('#main').html(result.error);
-      } else {
-        var feeds = document.getElementById('feeds');
-        feeds.innerHTML = '';
-        $.each(result, function(i, field) {
-          feeds.appendChild(br);
-          var img = document.createElement('img');
-          img.id = "Img"+ field["ImgID"];
-          img.src = 'getImage' + field["ImgLocation"];
-          img.width = '400';
-          feeds.appendChild(img);
-          var p = document.createElement('p');
-          p.innerHTML = field['ImgName'] + ' (' + field['PostDate'] + ')';
-          feeds.appendChild(p);
-        });
-      }      
-    }, "json");    
-   }
-</script>
+<script src="default.js"></script>
 </html>
