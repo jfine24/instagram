@@ -6,31 +6,25 @@
     <link href="login-box.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<script src="bundle.js"></script>
-
-<h1>Welcome to Instagram, <span id="userName"></span></h1>
-
-<div id="main"></div>
-
-
-<form method='post' action='/upload' enctype='multipart/form-data'>
-<br />
-<label for="imgName">Image Name</label>
-<input type="text" id="imgName" name="ImgName">
-<br />
-<label for="imgCaption">Image Caption</label>
-<input type="text" id="imgCaption" name="ImgCaption">
-<br />
-  <input type='file' id='image' name='image'/>
-  <input type='submit' />
-</form>
-
-
-<div id="feeds"></div>
-<form id="loginForm" name="loginForm" action="/logout" method="POST">
-  <input type="submit" value="Log Out" name="submit" id="submit" />
-</form><br /><br />
-
+  <script src="bundle.js"></script>
+  <center>
+    <h1>Welcome to Instagram, <span id="userName"></span></h1>
+    <div id="main"></div>
+    <form method='post' action='/upload' enctype='multipart/form-data'>
+      <br />
+      <input type="text" id="imgName" name="ImgName" class="form-login" placeholder="Image Name">
+      <br />
+      <input type="text" id="imgCaption" name="ImgCaption" class="form-login" placeholder="Image Caption">
+      <br />
+      <input type='file' id='image' name='image' class="login-box" />
+      <input type='submit' class="login-box"  />
+    </form>
+    <br /><br /><br />
+    <div id="feeds"></div>
+    <form id="loginForm" name="loginForm" action="/logout" method="POST">
+      <input type="submit" value="Log Out" name="submit" id="submit"  class="form-login" />
+    </form><br /><br />
+  </center>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 

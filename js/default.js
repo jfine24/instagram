@@ -20,14 +20,18 @@
         feeds.innerHTML = '';
         $.each(result, function(i, field) {
           feeds.appendChild(br);
+          var d = document.createElement('div');
+          d.id = "Block"+field["ImgID"];
+          d.className = "block";
           var img = document.createElement('img');
           img.id = "Img"+ field["ImgID"];
           img.src = 'getImage/' + field["UserID"] + "/" + field["ImgLocation"];
           img.width = '400';
-          feeds.appendChild(img);
+          d.appendChild(img);
           var p = document.createElement('p');
           p.innerHTML = field['ImgName'] + ' (' + field['PostDate'] + ')';
-          feeds.appendChild(p);
+          d.appendChild(p);
+          feeds.appendChild(d);
         });
       }      
     }, "json");    

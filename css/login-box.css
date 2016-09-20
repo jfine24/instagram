@@ -11,14 +11,14 @@ html {
 	width:333px;
 	height: 352px;
 	padding: 0px 76px 0 76px;
-	color: ##fff;
+	color: #000;
 	font: 18px Arial, Helvetica, sans-serif;
 	/* background: url(login-box-backg.png) no-repeat left top; */
 }
 
 .login-box {
 	padding: 7px; 
-	color: #fff;
+	color: #000;
 	font: 18px Arial, Helvetica, sans-serif;
 	/* background: url(login-box-backg.png) no-repeat left top; */
 }
@@ -26,9 +26,10 @@ html {
 .logout-box {
 
 	padding: 7px; 
-	color: #fff;
-	background-color: dodgerblue;
-	font: 18px Arial, Helvetica, sans-serif;''
+	color: #000;
+	background-color: rgba(40,40,200,0.4);    /*dodgerblue;*/
+	 
+	font: 18px Arial, Helvetica, sans-serif;
 }
 
 #login-box img {
@@ -39,6 +40,7 @@ html {
 	padding:0;
 	margin:0;
 	color: #ebebeb;
+	background-color: rgba(40,40,200,0.4);    /*dodgerblue;*/
 	font: bold 44px "Calibri", Arial;
 }
 
@@ -136,4 +138,11 @@ h1, h2 {
 
 p {
 	color: white;
+	background-color: darkorchid;
+	width: 500px;
+}
+.block {
+	background-color: rgba(40,40,200,0.4);    /*darksalmon;;*/
+    width: 500px;
+    padding-top: 30px;
 }
