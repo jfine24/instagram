@@ -10,6 +10,7 @@
 <body ng-controller="instaCtrl">
         <script src="default.js"></script>
     <script src="bundle.js"></script>
+    <script type="text/javascript" src="date.js"></script>
   <center>
     <h1>{{welcomeMessage}}</h1>
     <div id="main"></div>
@@ -45,11 +46,12 @@
     <br /><br /><br />
     <div id="feeds"></div>
 
-    <ul ng-show="!loginError" ng-repeat="result in results">
+    <ul ng-show="!loginError" ng-repeat="result in results" class="block">
       {{result.UserID}} <br />
       {{result.ImgName}} <br />
       <img ng-src="getImage/{{result.UserID}}/{{result.ImgLocation}}"/> <br />
       {{result.ImgCaption}} <br />
+      {{result.PostDate}} <br />
       
     </ul>
 
