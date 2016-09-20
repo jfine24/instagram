@@ -46,8 +46,19 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("C:\\Users\\admin\\Documents\\SSA 4Week\\web\\instagram\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("C:\\Users\\admin\\Documents\\SSA 4Week\\web\\instagram\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	'use strict';
 	
+	var instagram = angular.module('instagram', []);
+	instagram.controller('instaCtrl', function ($scope, $http) {
 	
+	  $scope.getUserFeed = function () {
+	    console.log("in function");
+	    $http.get("/getUserFeeds/1").success(function (data) {
+	      console.log("in function");
+	      $scope.results = data;
+	    });
+	  };
+	});
 	// function getUserFeeds(userID) {
 	//   var xhttp = new XMLHttpRequest();
 	//   var feedUrl= "http://localhost:3000/getUserFeeds/" + userID + "/";
@@ -82,8 +93,7 @@
 	// render((
 	//     <Main/>
 	// ), document.getElementById('main'));
-	"use strict";
-
+	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\admin\\Documents\\SSA 4Week\\web\\instagram\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "main.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }

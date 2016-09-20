@@ -4,12 +4,15 @@ var instagram = angular.module('instagram', []);
       instagram.controller('instaCtrl', function ($scope, $http, $window){
         
         $scope.login = function() {
-          var user = $scope.user;
-          console.log(user);
-          $http.post("/login/ + user", function(result){
-          console.log(result);
-        })
+          var user = $scope.userName;
+          $http.post("/login/", {userName: user}, function(result){
+            if (result.error) {
+          window.location.replace("/login.html");
+        } else {
+          console.log(result.userName);
+          getUserFeeds(result.userID);
         }
+    }, "json")};
         
 
         $scope.getUserFeed = function() {
